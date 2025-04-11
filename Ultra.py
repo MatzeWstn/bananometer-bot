@@ -1,3 +1,6 @@
+import discord
+from discord.ext import commands, tasks
+
 bot = commands.Bot(command_prefix="!",intents=intents)
 
 from flask import Flask
