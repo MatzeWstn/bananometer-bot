@@ -64,7 +64,7 @@ async def update_king_role():
         elif str(member.id) == top_user_id and role not in member.roles:
             await member.add_roles(role)
 
-@bot.command(name="banana")
+@bot.command(name="schwanzgröße")
 async def banana(ctx):
     with open(data_file, "r") as f:
         data = json.load(f)
@@ -129,7 +129,7 @@ async def banana(ctx):
         f"💬 _{kommentar}_"
     )
 
-@bot.command(name="ranking")
+@bot.command(name="rank")
 async def ranking(ctx):
     with open(data_file, "r") as f:
         data = json.load(f)
@@ -146,7 +146,7 @@ async def ranking(ctx):
 
     await ctx.send(msg)
 
-@bot.command(name="size")
+@bot.command(name="größe")
 async def size(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
@@ -168,7 +168,7 @@ async def size(ctx, member: discord.Member = None):
         f"📈 Verlauf:\n{verlaufs_text}"
     )
 
-@bot.command(name="spritzquote")
+@bot.command(name="spritzer")
 async def spritzquote(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
@@ -204,7 +204,7 @@ async def reset_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         await ctx.send("🚫 Nur Admins dürfen User zurücksetzen!")
 
-@bot.command(name="alltime-average")
+@bot.command(name="durchschnitt")
 async def average(ctx):
     with open(data_file, "r") as f:
         data = json.load(f)
