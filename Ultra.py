@@ -35,6 +35,11 @@ ränge = [
 async def on_ready():
     print(f"✅ Bananometer ist online als {bot.user}")
     update_king_role.start()
+    try:
+        synced = await bot.tree.sync()
+        print(f"📡 Slash-Commands synchronisiert: {len(synced)}")
+    except Exception as e:
+        print(f"❌ Fehler beim Slash-Sync: {e}")
 
 @tasks.loop(minutes=5)
 async def update_king_role():
