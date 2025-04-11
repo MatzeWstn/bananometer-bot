@@ -119,10 +119,6 @@ async def banana(ctx):
     antwort = messung(ctx.author)
     await ctx.send(antwort)
 
-@tree.command(name="schwanzgröße", description="Miss deine 🍌 in Zentimetern")
-async def slash_banana(interaction: discord.Interaction):
-    await interaction.response.send_message(messung(interaction.user))
-
 @bot.command(name="ranking")
 async def ranking(ctx):
     with open(data_file, "r") as f:
