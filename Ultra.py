@@ -114,7 +114,7 @@ def messung(ctx_author):
     return f"📏 **{ctx_author.display_name}’s Bananometer-Ergebnis:** {cm}cm {random.choice(emojis)}\n🏷️ Titel: *{rang}*\n💬 _{kommentar}_"
 
 # ========== BEFEHLE ========== #
-@bot.command(name="schwanzgröße")
+@bot.command(name="banana")
 async def banana(ctx):
     antwort = messung(ctx.author)
     await ctx.send(antwort)
@@ -136,7 +136,7 @@ async def ranking(ctx):
         msg += f"**{i}. {entry['name']}** – {entry['length']}cm | *{entry['rank']}*\n"
     await ctx.send(msg)
 
-@bot.command(name="größe")
+@bot.command(name="size")
 async def size(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
@@ -154,7 +154,7 @@ async def size(ctx, member: discord.Member = None):
         f"📈 Verlauf:\n{verlaufs_text}"
     )
 
-@bot.command(name="spritzer")
+@bot.command(name="spritzquote")
 async def spritzquote (ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
@@ -180,7 +180,7 @@ async def reset_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         await ctx.send("🚫 Nur Admins dürfen User zurücksetzen!")
 
-@bot.command(name="im schnitt")
+@bot.command(name="average")
 async def average(ctx):
     with open(data_file, "r") as f:
         data = json.load(f)
@@ -191,7 +191,7 @@ async def average(ctx):
     durchschnitt = round(sum(werte) / len(werte), 2)
     await ctx.send(f"📊 Der aktuelle Durchschnitt liegt bei **{durchschnitt}cm**!")
 
-@bot.command(name="schwanzvergleich")
+@bot.command(name="vergleich")
 async def vergleichen(ctx, user1: discord.Member, user2: discord.Member):
     with open(data_file, "r") as f:
         data = json.load(f)
