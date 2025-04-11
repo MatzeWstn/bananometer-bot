@@ -89,13 +89,15 @@ async def banana(ctx):
         kommentar = "Der ist klein UND dünn!! 🔬"
     elif cm < 7:
         kommentar = "Klein, aber stinkt wie nh großer!. 🤏"
-    elif cm < 13:
+    elif cm < 11:
         kommentar = "Nice Schwons Bro 🍌"
-    elif cm < 10:
+    elif cm < 15:
         kommentar = "Du kannst mit nem harten gegen die Wasnd rennen und brichst dir trotzdem die Nase! 🍌"
-    elif cm < 18:
+    elif cm < 19:
         kommentar = "Ohjoo Bro, chill mo dei Bux 💦"
-    else cm < 20: 
+    elif cm < 22:
+        kommentar = "Fleischpeitsche himself 🤏"
+    else : 
         kommentar = "Unreal im Benanengame 🚀"
 
     old_entry = data.get(user_id, {})
