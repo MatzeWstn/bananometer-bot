@@ -30,7 +30,7 @@ if not os.path.exists(data_file):
     "PimmelPirat 🏴‍☠️", "Benanenbaron 🍌", "Schlaffi des Monats 😔",
     "Wichsender-Wicht 🌱", "Vorhaut-Virtuose 🔍",
     "Dödel-Desperado 🚀", "Schwanzschwenker 😎"
-]
+
 
 # ========== BOT READY ========== #
 @bot.event
