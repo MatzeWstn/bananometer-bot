@@ -239,7 +239,7 @@ async def slash_spritzquote(interaction: discord.Interaction, member: discord.Me
     ctx.author = interaction.user
     await spritzquote(ctx, member)
 
-@bot.tree.command(name="im schnitt", description="Zeigt den 🍌 Durchschnitt")
+@bot.tree.command(name="imschnitt", description="Zeigt den 🍌 Durchschnitt")
 async def slash_average(interaction: discord.Interaction):
     ctx = await bot.get_context(interaction)
     await average(ctx)
