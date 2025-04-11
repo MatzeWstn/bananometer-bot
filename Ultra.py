@@ -217,6 +217,42 @@ def run():
 
 def keep_alive():
     Thread(target=run).start()
+    
+# ========== / Commands ========== #
+@bot.tree.command(name="banana", description="Miss deine 🍌")
+async def slash_banana(interaction: discord.Interaction):
+    ctx = await bot.get_context(interaction)
+    await banana(ctx)
+
+@bot.tree.command(name="ranking", description="Zeigt die Top 10 🍌")
+async def slash_ranking(interaction: discord.Interaction):
+    ctx = await bot.get_context(interaction)
+    await ranking(ctx)
+
+@bot.tree.command(name="size", description="Zeigt den letzten Wert von dir oder einem anderen")
+@app_commands.describe(member="Optional: Member zum Prüfen")
+async def slash_size(interaction: discord.Interaction, member: discord.Member = None):
+    ctx = await bot.get_context(interaction)
+    ctx.author = interaction.user
+    await size(ctx, member)
+
+@bot.tree.command(name="spritzquote", description="Zeigt wie oft jemand gemessen hat")
+@app_commands.describe(member="Optional: Member zum Prüfen")
+async def slash_spritzquote(interaction: discord.Interaction, member: discord.Member = None):
+    ctx = await bot.get_context(interaction)
+    ctx.author = interaction.user
+    await spritzquote(ctx, member)
+
+@bot.tree.command(name="alltime-average", description="Zeigt den 🍌 Durchschnitt")
+async def slash_average(interaction: discord.Interaction):
+    ctx = await bot.get_context(interaction)
+    await average(ctx)
+
+@bot.tree.command(name="vergleich", description="Vergleicht zwei Schwänze")
+@app_commands.describe(user1="Erster User", user2="Zweiter User")
+async def slash_vergleich(interaction: discord.Interaction, user1: discord.Member, user2: discord.Member):
+    ctx = await bot.get_context(interaction)
+    await vergleichen(ctx, user1, user2)
 
 # ========== START ========== #
 keep_alive()
