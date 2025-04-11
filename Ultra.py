@@ -1,3 +1,5 @@
+bot = commands.Bot(command_prefix="!",intents=intents)
+
 from flask import Flask
 from threading import Thread
 import discord
