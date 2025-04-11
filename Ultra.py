@@ -25,11 +25,11 @@ if not os.path.exists(data_file):
     with open(data_file, "w") as f:
         json.dump({}, f)
 
-ränge = [
-    "Mini-Schlappi 🍒", "Gurkenlord 🥒", "Schnellspritz-König 💦",
-    "Pimmel-Pirat 🏴‍☠️", "Banana Boss 🍌", "Schlaffi des Monats 😔",
-    "Wachsender Hoffnungsträger 🌱", "Unterschätzte Legende 🔍",
-    "NASA-Material 🚀", "Flexx-Gott 😎"
+# ==========  Rangliste ========== #
+    "MiniPimmel 🍒", "Gurkengurgler 🥒", "Kleinpimmliger Schnellspritzer 💦",
+    "PimmelPirat 🏴‍☠️", "Benanenbaron 🍌", "Schlaffi des Monats 😔",
+    "Wichsender-Wicht 🌱", "Vorhaut-Virtuose 🔍",
+    "Dödel-Desperado 🚀", "Schwanzschwenker 😎"
 ]
 
 # ========== BOT READY ========== #
@@ -88,9 +88,9 @@ def messung(ctx_author):
     kommentar = (
         "Der ist klein UND dünn!! 🔬" if cm < 3 else
         "Klein, aber stinkt wie 'n großer! 🤏" if cm < 7 else
-        "Nice Schwons Bro 🍌" if cm < 12 else
-        "Du kannst mit 'nem harten gegen die Wand rennen und brichst dir trotzdem die Nase! 🍌" if cm < 16 else
-        "Ohjoo Bro, chill mo dei Bux 💦" if cm < 20 else
+        "Nice Schwons Bro 🍌" if cm < 15 else
+        "Du kannst mit 'nem harten gegen die Wand rennen und brichst dir trotzdem die Nase! 🍌" if cm < 20 else
+        "Ohjoo Bro, chill mo dei Bux 💦" if cm < 25 else
         "Unreal im Bananen-Game 🚀"
     )
 
@@ -114,12 +114,12 @@ def messung(ctx_author):
     return f"📏 **{ctx_author.display_name}’s Bananometer-Ergebnis:** {cm}cm {random.choice(emojis)}\n🏷️ Titel: *{rang}*\n💬 _{kommentar}_"
 
 # ========== BEFEHLE ========== #
-@bot.command(name="banana")
+@bot.command(name="schwanzgröße")
 async def banana(ctx):
     antwort = messung(ctx.author)
     await ctx.send(antwort)
 
-@tree.command(name="banana", description="Miss deine 🍌 in Zentimetern")
+@tree.command(name="schwanzgröße", description="Miss deine 🍌 in Zentimetern")
 async def slash_banana(interaction: discord.Interaction):
     await interaction.response.send_message(messung(interaction.user))
 
@@ -136,7 +136,7 @@ async def ranking(ctx):
         msg += f"**{i}. {entry['name']}** – {entry['length']}cm | *{entry['rank']}*\n"
     await ctx.send(msg)
 
-@bot.command(name="size")
+@bot.command(name="größe")
 async def size(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
@@ -154,13 +154,13 @@ async def size(ctx, member: discord.Member = None):
         f"📈 Verlauf:\n{verlaufs_text}"
     )
 
-@bot.command(name="spritzquote")
-async def spritzquote(ctx, member: discord.Member = None):
+@bot.command(name="spritzer")
+async def spritzquote (ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
         data = json.load(f)
     count = data.get(str(member.id), {}).get("count", 0)
-    await ctx.send(f"💦 **{member.display_name}** hat den Bananometer bereits **{count}x** benutzt!")
+    await ctx.send(f"💦 **{member.display_name}** hat das Geodreieck bereits **{count}x** benutzt!")
 
 @bot.command(name="reset")
 @commands.has_permissions(administrator=True)
@@ -180,7 +180,7 @@ async def reset_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         await ctx.send("🚫 Nur Admins dürfen User zurücksetzen!")
 
-@bot.command(name="alltime-average")
+@bot.command(name="im schnitt")
 async def average(ctx):
     with open(data_file, "r") as f:
         data = json.load(f)
@@ -191,7 +191,7 @@ async def average(ctx):
     durchschnitt = round(sum(werte) / len(werte), 2)
     await ctx.send(f"📊 Der aktuelle Durchschnitt liegt bei **{durchschnitt}cm**!")
 
-@bot.command(name="vergleich")
+@bot.command(name="schwanzvergleich")
 async def vergleichen(ctx, user1: discord.Member, user2: discord.Member):
     with open(data_file, "r") as f:
         data = json.load(f)
@@ -219,7 +219,7 @@ def keep_alive():
     Thread(target=run).start()
     
 # ========== / Commands ========== #
-@bot.tree.command(name="banana", description="Miss deine 🍌")
+@bot.tree.command(name="schwanzgröße", description="Miss deine 🍌")
 async def slash_banana(interaction: discord.Interaction):
     ctx = await bot.get_context(interaction)
     await banana(ctx)
@@ -229,21 +229,21 @@ async def slash_ranking(interaction: discord.Interaction):
     ctx = await bot.get_context(interaction)
     await ranking(ctx)
 
-@bot.tree.command(name="size", description="Zeigt den letzten Wert von dir oder einem anderen")
+@bot.tree.command(name="größe", description="Zeigt den letzten Wert von dir oder einem anderen")
 @app_commands.describe(member="Optional: Member zum Prüfen")
 async def slash_size(interaction: discord.Interaction, member: discord.Member = None):
     ctx = await bot.get_context(interaction)
     ctx.author = interaction.user
     await size(ctx, member)
 
-@bot.tree.command(name="spritzquote", description="Zeigt wie oft jemand gemessen hat")
+@bot.tree.command(name="spritzer", description="Zeigt wie oft jemand gemessen hat")
 @app_commands.describe(member="Optional: Member zum Prüfen")
 async def slash_spritzquote(interaction: discord.Interaction, member: discord.Member = None):
     ctx = await bot.get_context(interaction)
     ctx.author = interaction.user
     await spritzquote(ctx, member)
 
-@bot.tree.command(name="alltime-average", description="Zeigt den 🍌 Durchschnitt")
+@bot.tree.command(name="im schnitt", description="Zeigt den 🍌 Durchschnitt")
 async def slash_average(interaction: discord.Interaction):
     ctx = await bot.get_context(interaction)
     await average(ctx)
@@ -253,6 +253,17 @@ async def slash_average(interaction: discord.Interaction):
 async def slash_vergleich(interaction: discord.Interaction, user1: discord.Member, user2: discord.Member):
     ctx = await bot.get_context(interaction)
     await vergleichen(ctx, user1, user2)
+
+# === KEEP ALIVE ===
+app = Flask('')
+@app.route('/')
+def home():
+    return "Ich bin wach!"
+def run():
+    app.run(host='0.0.0.0', port=8080)
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 
 # ========== START ========== #
 keep_alive()
