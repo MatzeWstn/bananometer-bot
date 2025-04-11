@@ -91,11 +91,11 @@ async def banana(ctx):
         kommentar = "Klein, aber stinkt wie nh großer!. 🤏"
     elif cm < 13:
         kommentar = "Nice Schwons Bro 🍌"
-    elif cm < 18:
+    elif cm < 10:
         kommentar = "Du kannst mit nem harten gegen die Wasnd rennen und brichst dir trotzdem die Nase! 🍌"
-    elif cm < 25:
+    elif cm < 18:
         kommentar = "Ohjoo Bro, chill mo dei Bux 💦"
-    else:
+    else cm < 20: 
         kommentar = "Unreal im Benanengame 🚀"
 
     old_entry = data.get(user_id, {})
@@ -129,7 +129,7 @@ async def banana(ctx):
         f"💬 _{kommentar}_"
     )
 
-@bot.command(name="rank")
+@bot.command(name="rang")
 async def ranking(ctx):
     with open(data_file, "r") as f:
         data = json.load(f)
@@ -146,7 +146,7 @@ async def ranking(ctx):
 
     await ctx.send(msg)
 
-@bot.command(name="größe")
+@bot.command(name="verlauf")
 async def size(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
@@ -168,7 +168,7 @@ async def size(ctx, member: discord.Member = None):
         f"📈 Verlauf:\n{verlaufs_text}"
     )
 
-@bot.command(name="spritzer")
+@bot.command(name="wieoft")
 async def spritzquote(ctx, member: discord.Member = None):
     member = member or ctx.author
     with open(data_file, "r") as f:
