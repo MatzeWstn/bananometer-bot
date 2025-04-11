@@ -9,6 +9,7 @@ import os
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
+# Setup
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 intents = discord.Intents.default()
@@ -45,12 +46,14 @@ async def on_ready():
 async def update_king_role():
     with open(data_file, "r") as f:
         data = json.load(f)
-    
+
     if not data:
         return
 
     top_user_id = max(data.items(), key=lambda x: x[1]['length'])[0]
     guild = discord.utils.get(bot.guilds)
+    if not guild:
+        return
     role = discord.utils.get(guild.roles, name="🍌 King Banana")
     if not role:
         return
@@ -241,16 +244,18 @@ async def vergleichen(ctx, user1: discord.Member, user2: discord.Member):
 
     await ctx.send(msg)
 
-    app = Flask('')
+# Webserver für Render & UptimeRobot
+app = Flask('')
 @app.route('/')
 def home():
     return "Ich bin wach!"
+
 def run():
     app.run(host='0.0.0.0', port=8080)
+
 def keep_alive():
     t = Thread(target=run)
     t.start()
 
 keep_alive()
 bot.run(os.getenv("DISCORD_TOKEN"))
-
